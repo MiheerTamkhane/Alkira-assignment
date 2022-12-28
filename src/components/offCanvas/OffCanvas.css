@@ -30,6 +30,7 @@
 .details-row {
   display: flex;
   font-weight: bold;
+  font-size: 12px;
 }
 .details-row > p {
   width: 50%;
