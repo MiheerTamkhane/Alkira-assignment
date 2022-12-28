@@ -1,0 +1,16 @@
+.App {
+  width: 100%;
+  max-width: 80vw;
+  margin: 0 auto;
+  padding: 2rem 0;
+  /* border: 1px solid black; */
+}
+
+.heading {
+  font-weight: bolder;
+  color: #074684;
+}
+
+.search-container {
+  margin: 1rem 0;
+}
