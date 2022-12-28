@@ -71,7 +71,7 @@ const TeamsProvider = ({ children }) => {
 
   useEffect(() => {
     setTeamDetails(games.find((game) => game.home_team.id === selectedTeam));
-  }, [selectedTeam]);
+  }, [selectedTeam, games]);
 
   function changePageHandler(pageNum) {
     dispatchData({ type: "CURR_PAGE", payload: pageNum });
