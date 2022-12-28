@@ -1,3 +1,4 @@
-export { TeamsTable } from "./TeamsTable";
-export { OffCanvas } from "./OffCanvas";
-export { PaginationComp } from "./PaginationComp";
+export { TeamsTable } from "./table/TeamsTable";
+export { OffCanvas } from "./offCanvas/OffCanvas";
+export { PaginationComp } from "./pagination/PaginationComp";
+export { Search } from "./search/Search";

@@ -1,0 +1,40 @@
+.offcanvas-header {
+  background-color: #f2f2f2;
+}
+.details-container {
+  padding: 0.5rem;
+  font-size: 14px;
+  display: flex;
+  height: fit-content;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: start;
+}
+
+.details-head {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.5rem;
+}
+
+.details-body > h6 {
+  font-weight: bold;
+}
+.team-row {
+  width: 100%;
+  display: flex;
+}
+.team-row > p {
+  width: 50%;
+}
+.details-row {
+  display: flex;
+  font-weight: bold;
+}
+.details-row > p {
+  width: 50%;
+}
+.details {
+  margin-top: 1.6rem;
+  margin-left: 0.5rem;
+}

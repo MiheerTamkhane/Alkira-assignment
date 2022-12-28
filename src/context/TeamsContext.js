@@ -1,31 +1,82 @@
-import { useContext, useState, useEffect, createContext } from "react";
+import {
+  useContext,
+  useState,
+  useEffect,
+  createContext,
+  useReducer,
+} from "react";
 import axios from "axios";
+import { filterBySearch, sortByCity } from "../utils/filterUtils";
 
 const TeamsContext = createContext();
-const URL = "https://www.balldontlie.io/api/v1/teams";
+const teamsURL = "https://www.balldontlie.io/api/v1/teams";
+const gamesURL = "https://www.balldontlie.io/api/v1/games/";
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "LOADING":
+      return { ...state, isLoading: action.payload };
+    case "SEARCH":
+      return { ...state, query: action.payload };
+    case "SORT":
+      return { ...state, sort: action.payload };
+    case "CURR_PAGE":
+      return { ...state, currentPage: action.payload };
+    default:
+      return state;
+  }
+}
+
 const TeamsProvider = ({ children }) => {
   const [teams, setTeams] = useState([]);
+  const [games, setGames] = useState([]);
+  const [data, dispatchData] = useReducer(reducer, {
+    isLoading: true,
+    currentPage: 1,
+    teamsPerPage: 10,
+    query: "",
+    sort: 0,
+  });
   const [showCanvas, setShowCanvas] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [teamsPerPage, setTeamsPerPage] = useState(10);
+  const [teamDetails, setTeamDetails] = useState({});
+  const [selectedTeam, setSelectedTeam] = useState(null);
+  const sortedData = sortByCity(teams, data.sort);
+  const searchedData = filterBySearch(sortedData, data.query);
+  const indexOfLastPost = data.currentPage * data.teamsPerPage;
+  const indexOfFirstPost = indexOfLastPost - data.teamsPerPage;
+  const currentTeams = searchedData.slice(indexOfFirstPost, indexOfLastPost);
 
   useEffect(() => {
     (async () => {
       await axios
-        .get(URL)
+        .get(teamsURL)
         .then((res) => res.data)
-        .then((result) => setTeams(result.data));
+        .then((result) => {
+          setTeams(result.data);
+          dispatchData({ type: "LOADING", payload: false });
+        });
     })();
   }, []);
 
-  const indexOfLastPost = currentPage * teamsPerPage;
-  const indexOfFirstPost = indexOfLastPost - teamsPerPage;
-  const currentTeams = teams.slice(indexOfFirstPost, indexOfLastPost);
+  useEffect(() => {
+    (async () => {
+      await axios
+        .get(gamesURL)
+        .then((res) => res.data)
+        .then((result) => {
+          setGames(result.data);
+        });
+    })();
+  }, []);
+
+  useEffect(() => {
+    setTeamDetails(games.find((game) => game.home_team.id === selectedTeam));
+  }, [selectedTeam]);
 
   function changePageHandler(pageNum) {
-    setCurrentPage(pageNum);
+    dispatchData({ type: "CURR_PAGE", payload: pageNum });
   }
+
   return (
     <TeamsContext.Provider
       value={{
@@ -33,9 +84,13 @@ const TeamsProvider = ({ children }) => {
         showCanvas,
         setShowCanvas,
         currentTeams,
-        currentPage,
-        teamsPerPage,
         changePageHandler,
+        dispatchData,
+        data,
+        searchedData,
+        selectedTeam,
+        setSelectedTeam,
+        teamDetails,
       }}
     >
       {children}

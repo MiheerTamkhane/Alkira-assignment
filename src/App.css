@@ -7,5 +7,10 @@
 }
 
 .heading {
+  font-weight: bolder;
   color: #074684;
+}
+
+.search-container {
+  margin: 1rem 0;
 }

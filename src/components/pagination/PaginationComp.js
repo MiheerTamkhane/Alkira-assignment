@@ -1,23 +1,26 @@
 import Pagination from "react-bootstrap/Pagination";
 import PageItem from "react-bootstrap/PageItem";
-import { useTeams } from "../context/TeamsContext";
+import { useTeams } from "../../context/TeamsContext";
 import "./PaginationComp.css";
 export const PaginationComp = () => {
-  const { teams, teamsPerPage, currentPage, changePageHandler } = useTeams();
+  const { searchedData, changePageHandler, data } = useTeams();
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(teams.length / teamsPerPage); i++) {
+  for (
+    let i = 1;
+    i <= Math.ceil(searchedData.length / data.teamsPerPage);
+    i++
+  ) {
     pageNumbers.push(i);
   }
 
-  console.log(pageNumbers);
   return (
     <div className="pagination-container">
-      <Pagination>
+      <Pagination size="sm">
         {pageNumbers.map((number) => {
           return (
             <PageItem
               key={number}
-              active={number === currentPage}
+              active={number === data.currentPage}
               onClick={() => {
                 changePageHandler(number);
               }}
