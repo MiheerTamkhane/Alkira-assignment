@@ -3,6 +3,7 @@ import { useTeams } from "../../context/TeamsContext";
 import "./OffCanvas.css";
 export const OffCanvas = () => {
   const { showCanvas, setShowCanvas, teamDetails } = useTeams();
+  console.log(teamDetails);
   return (
     <>
       <Offcanvas show={showCanvas} onHide={setShowCanvas} placement={"end"}>
@@ -14,11 +15,15 @@ export const OffCanvas = () => {
             <div className="details-head">
               <div className="team-row">
                 <p>Team Full Name</p>
-                <p>{teamDetails?.home_team?.full_name}</p>
+                <p>
+                  {teamDetails
+                    ? teamDetails?.home_team?.full_name
+                    : "Atlanta Hawks"}
+                </p>
               </div>
               <div className="team-row">
                 <p>Total Games in {teamDetails?.season}</p>
-                <p>{teamDetails?.home_team_score}</p>
+                <p>{teamDetails ? teamDetails?.home_team_score : "88"}</p>
               </div>
             </div>
             <div className="details-body">
@@ -26,23 +31,29 @@ export const OffCanvas = () => {
               <div className="details">
                 <div className="details-row">
                   <p>Date</p>
-                  <p>{teamDetails?.date?.split("T")[0]}</p>
+                  <p>
+                    {teamDetails
+                      ? teamDetails?.date?.split("T")[0]
+                      : "2019-02-08"}
+                  </p>
                 </div>
                 <div className="details-row">
                   <p>Home Team</p>
-                  <p>{teamDetails?.home_team?.name}</p>
+                  <p>{teamDetails ? teamDetails?.home_team?.name : "Hawks"}</p>
                 </div>
                 <div className="details-row">
                   <p>Home Team Score</p>
-                  <p>{teamDetails?.home_team_score}</p>
+                  <p>{teamDetails ? teamDetails?.home_team_score : "120"}</p>
                 </div>
                 <div className="details-row">
                   <p>Visitor Team</p>
-                  <p>{teamDetails?.visitor_team?.name}</p>
+                  <p>
+                    {teamDetails ? teamDetails?.visitor_team?.name : "Hornets"}
+                  </p>
                 </div>
                 <div className="details-row">
                   <p>Visitor Team Score</p>
-                  <p>{teamDetails?.visitor_team_score}</p>
+                  <p>{teamDetails ? teamDetails?.visitor_team_score : "129"}</p>
                 </div>
               </div>
             </div>
