@@ -8,7 +8,9 @@ export const OffCanvas = () => {
     <>
       <Offcanvas show={showCanvas} onHide={setShowCanvas} placement={"end"}>
         <Offcanvas.Header closeButton className="offcanvas-header">
-          <Offcanvas.Title>{teamDetails?.home_team?.name}</Offcanvas.Title>
+          <Offcanvas.Title>
+            {teamDetails ? teamDetails?.home_team?.name : "Hawks"}
+          </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div className="details-container">

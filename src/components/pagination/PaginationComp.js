@@ -7,7 +7,7 @@ export const PaginationComp = () => {
   const pageNumbers = [];
   for (
     let i = 1;
-    i <= Math.ceil(searchedData.length / data.teamsPerPage);
+    i <= Math.ceil(searchedData?.length / data?.teamsPerPage);
     i++
   ) {
     pageNumbers.push(i);

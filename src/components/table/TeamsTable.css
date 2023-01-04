@@ -30,14 +30,14 @@
   font-weight: bold;
   padding: 0.8rem;
 }
-.city-col {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  justify-content: center;
+
+.table-row-head {
   cursor: pointer;
 }
 
+.table-row-head > span {
+  margin-right: 0.3rem;
+}
 .sort-btn {
   transform: rotate(180deg);
 }

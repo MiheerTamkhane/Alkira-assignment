@@ -6,7 +6,8 @@ import {
   useReducer,
 } from "react";
 import axios from "axios";
-import { filterBySearch, sortByCity } from "../utils/filterUtils";
+import { filterBySearch, sortingHandler } from "../utils/filterUtils";
+import { debounce } from "../utils/debouce";
 
 const TeamsContext = createContext();
 const teamsURL = "https://www.balldontlie.io/api/v1/teams";
@@ -35,17 +36,17 @@ const TeamsProvider = ({ children }) => {
     currentPage: 1,
     teamsPerPage: 10,
     query: "",
-    sort: 0,
+    sort: null,
   });
   const [showCanvas, setShowCanvas] = useState(false);
   const [teamDetails, setTeamDetails] = useState({});
   const [selectedTeam, setSelectedTeam] = useState(null);
-  const sortedData = sortByCity(teams, data.sort);
-  const searchedData = filterBySearch(sortedData, data.query);
+  const sortedData = sortingHandler(teams, data.sort);
+  const searchedData = filterBySearch(sortedData, data?.query);
   const indexOfLastPost = data.currentPage * data.teamsPerPage;
   const indexOfFirstPost = indexOfLastPost - data.teamsPerPage;
-  const currentTeams = searchedData.slice(indexOfFirstPost, indexOfLastPost);
-
+  const currentTeams = searchedData?.slice(indexOfFirstPost, indexOfLastPost);
+  console.log(currentTeams);
   useEffect(() => {
     (async () => {
       await axios
@@ -100,7 +101,7 @@ const TeamsProvider = ({ children }) => {
 
 const useTeams = () => {
   const context = useContext(TeamsContext);
-  if (context === undefined) throw new Error("TeamsContext error!");
+  if (context === undefined) Error("TeamsContext error!");
 
   return context;
 };

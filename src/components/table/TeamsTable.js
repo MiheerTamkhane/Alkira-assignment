@@ -23,20 +23,27 @@ export const TeamsTable = () => {
         <Table responsive hover borderless className="table">
           <thead className="table-head">
             <tr>
-              <th>Team Name</th>
               <th
-                className="city-col"
+                className="table-row-head"
                 onClick={() =>
                   dispatchData({
                     type: "SORT",
-                    payload: !data.sort,
+                    payload: {
+                      sortType: "name",
+                      bool: !data.sort?.bool,
+                    },
                   })
                 }
               >
-                <span>City</span>
+                <span>Team Name</span>
                 <span>
                   <svg
-                    style={{ transform: `rotate(${data.sort ? 180 : 0}deg)` }}
+                    style={{
+                      transform:
+                        data.sort?.sortType === "name" && data.sort?.bool
+                          ? `rotate(180deg)`
+                          : `rotate(0deg)`,
+                    }}
                     width="12"
                     height="6"
                     viewBox="0 0 18 10"
@@ -52,9 +59,145 @@ export const TeamsTable = () => {
                   </svg>
                 </span>
               </th>
-              <th>Abbreviation</th>
-              <th>Conference</th>
-              <th>Division</th>
+              <th
+                className="table-row-head"
+                onClick={() =>
+                  dispatchData({
+                    type: "SORT",
+                    payload: {
+                      sortType: "city",
+                      bool: !data.sort?.bool,
+                    },
+                  })
+                }
+              >
+                <span>City</span>
+                <span>
+                  <svg
+                    style={{
+                      transform:
+                        data.sort?.sortType === "city" && data.sort?.bool
+                          ? `rotate(180deg)`
+                          : `rotate(0deg)`,
+                    }}
+                    width="12"
+                    height="6"
+                    viewBox="0 0 18 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M0.25 9.5L9 0.75L17.75 9.5H0.25Z"
+                      fill="white"
+                    />
+                  </svg>
+                </span>
+              </th>
+              <th
+                className="table-row-head"
+                onClick={() =>
+                  dispatchData({
+                    type: "SORT",
+                    payload: {
+                      sortType: "abbreviation",
+                      bool: !data.sort?.bool,
+                    },
+                  })
+                }
+              >
+                <span>Abbreviation</span>
+                <span>
+                  <svg
+                    style={{
+                      transform:
+                        data.sort?.sortType === "abbreviation" &&
+                        data.sort?.bool
+                          ? `rotate(180deg)`
+                          : `rotate(0deg)`,
+                    }}
+                    width="12"
+                    height="6"
+                    viewBox="0 0 18 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M0.25 9.5L9 0.75L17.75 9.5H0.25Z"
+                      fill="white"
+                    />
+                  </svg>
+                </span>
+              </th>
+              <th
+                className="table-row-head"
+                onClick={() =>
+                  dispatchData({
+                    type: "SORT",
+                    payload: { sortType: "conference", bool: !data.sort?.bool },
+                  })
+                }
+              >
+                <span>Conference</span>
+                <span>
+                  <svg
+                    style={{
+                      transform:
+                        data.sort?.sortType === "conference" && data.sort?.bool
+                          ? `rotate(180deg)`
+                          : `rotate(0deg)`,
+                    }}
+                    width="12"
+                    height="6"
+                    viewBox="0 0 18 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M0.25 9.5L9 0.75L17.75 9.5H0.25Z"
+                      fill="white"
+                    />
+                  </svg>
+                </span>
+              </th>
+              <th
+                className="table-row-head"
+                onClick={() =>
+                  dispatchData({
+                    type: "SORT",
+                    payload: { sortType: "division", bool: !data.sort?.bool },
+                  })
+                }
+              >
+                <span>Division</span>
+                <span>
+                  <svg
+                    style={{
+                      transform:
+                        data.sort?.sortType === "division" && data.sort?.bool
+                          ? `rotate(180deg)`
+                          : `rotate(0deg)`,
+                    }}
+                    width="12"
+                    height="6"
+                    viewBox="0 0 18 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M0.25 9.5L9 0.75L17.75 9.5H0.25Z"
+                      fill="white"
+                    />
+                  </svg>
+                </span>
+              </th>
             </tr>
           </thead>
 
@@ -66,7 +209,7 @@ export const TeamsTable = () => {
                   className={`table-row ${
                     item.id === selectedTeam && showCanvas ? "bg-blue" : ""
                   }`}
-                  onClick={(e) => {
+                  onClick={() => {
                     setSelectedTeam(item.id);
                     setShowCanvas(!showCanvas);
                   }}
