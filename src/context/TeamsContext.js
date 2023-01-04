@@ -7,7 +7,6 @@ import {
 } from "react";
 import axios from "axios";
 import { filterBySearch, sortingHandler } from "../utils/filterUtils";
-import { debounce } from "../utils/debouce";
 
 const TeamsContext = createContext();
 const teamsURL = "https://www.balldontlie.io/api/v1/teams";
