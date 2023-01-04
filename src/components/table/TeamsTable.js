@@ -30,7 +30,8 @@ export const TeamsTable = () => {
                     type: "SORT",
                     payload: {
                       sortType: "name",
-                      bool: !data.sort?.bool,
+                      bool:
+                        data.sort.sortType === "name" ? !data.sort.bool : true,
                     },
                   })
                 }
@@ -41,8 +42,8 @@ export const TeamsTable = () => {
                     style={{
                       transform:
                         data.sort?.sortType === "name" && data.sort?.bool
-                          ? `rotate(180deg)`
-                          : `rotate(0deg)`,
+                          ? `rotate(0deg)`
+                          : `rotate(180deg)`,
                     }}
                     width="12"
                     height="6"
@@ -66,7 +67,8 @@ export const TeamsTable = () => {
                     type: "SORT",
                     payload: {
                       sortType: "city",
-                      bool: !data.sort?.bool,
+                      bool:
+                        data.sort.sortType === "city" ? !data.sort.bool : true,
                     },
                   })
                 }
@@ -77,8 +79,8 @@ export const TeamsTable = () => {
                     style={{
                       transform:
                         data.sort?.sortType === "city" && data.sort?.bool
-                          ? `rotate(180deg)`
-                          : `rotate(0deg)`,
+                          ? `rotate(0deg)`
+                          : `rotate(180deg)`,
                     }}
                     width="12"
                     height="6"
@@ -102,7 +104,10 @@ export const TeamsTable = () => {
                     type: "SORT",
                     payload: {
                       sortType: "abbreviation",
-                      bool: !data.sort?.bool,
+                      bool:
+                        data.sort.sortType === "abbreviation"
+                          ? !data.sort.bool
+                          : true,
                     },
                   })
                 }
@@ -114,8 +119,8 @@ export const TeamsTable = () => {
                       transform:
                         data.sort?.sortType === "abbreviation" &&
                         data.sort?.bool
-                          ? `rotate(180deg)`
-                          : `rotate(0deg)`,
+                          ? `rotate(0deg)`
+                          : `rotate(180deg)`,
                     }}
                     width="12"
                     height="6"
@@ -137,7 +142,13 @@ export const TeamsTable = () => {
                 onClick={() =>
                   dispatchData({
                     type: "SORT",
-                    payload: { sortType: "conference", bool: !data.sort?.bool },
+                    payload: {
+                      sortType: "conference",
+                      bool:
+                        data.sort.sortType === "conference"
+                          ? !data.sort.bool
+                          : true,
+                    },
                   })
                 }
               >
@@ -147,8 +158,8 @@ export const TeamsTable = () => {
                     style={{
                       transform:
                         data.sort?.sortType === "conference" && data.sort?.bool
-                          ? `rotate(180deg)`
-                          : `rotate(0deg)`,
+                          ? `rotate(0deg)`
+                          : `rotate(180deg)`,
                     }}
                     width="12"
                     height="6"
@@ -170,7 +181,13 @@ export const TeamsTable = () => {
                 onClick={() =>
                   dispatchData({
                     type: "SORT",
-                    payload: { sortType: "division", bool: !data.sort?.bool },
+                    payload: {
+                      sortType: "division",
+                      bool:
+                        data.sort.sortType === "division"
+                          ? !data.sort.bool
+                          : true,
+                    },
                   })
                 }
               >
@@ -180,8 +197,8 @@ export const TeamsTable = () => {
                     style={{
                       transform:
                         data.sort?.sortType === "division" && data.sort?.bool
-                          ? `rotate(180deg)`
-                          : `rotate(0deg)`,
+                          ? `rotate(0deg)`
+                          : `rotate(180deg)`,
                     }}
                     width="12"
                     height="6"

@@ -5,38 +5,15 @@ import {
   createContext,
   useReducer,
 } from "react";
-import axios from "axios";
 import { filterBySearch, sortingHandler } from "../utils/filterUtils";
-
+import { getGamesService, getTeamsService } from "../services";
+import { reducer, initialState } from "../reducer/reducer";
 const TeamsContext = createContext();
-const teamsURL = "https://www.balldontlie.io/api/v1/teams";
-const gamesURL = "https://www.balldontlie.io/api/v1/games/";
-
-function reducer(state, action) {
-  switch (action.type) {
-    case "LOADING":
-      return { ...state, isLoading: action.payload };
-    case "SEARCH":
-      return { ...state, query: action.payload };
-    case "SORT":
-      return { ...state, sort: action.payload };
-    case "CURR_PAGE":
-      return { ...state, currentPage: action.payload };
-    default:
-      return state;
-  }
-}
 
 const TeamsProvider = ({ children }) => {
   const [teams, setTeams] = useState([]);
   const [games, setGames] = useState([]);
-  const [data, dispatchData] = useReducer(reducer, {
-    isLoading: true,
-    currentPage: 1,
-    teamsPerPage: 10,
-    query: "",
-    sort: null,
-  });
+  const [data, dispatchData] = useReducer(reducer, initialState);
   const [showCanvas, setShowCanvas] = useState(false);
   const [teamDetails, setTeamDetails] = useState({});
   const [selectedTeam, setSelectedTeam] = useState(null);
@@ -45,27 +22,21 @@ const TeamsProvider = ({ children }) => {
   const indexOfLastPost = data.currentPage * data.teamsPerPage;
   const indexOfFirstPost = indexOfLastPost - data.teamsPerPage;
   const currentTeams = searchedData?.slice(indexOfFirstPost, indexOfLastPost);
-  console.log(currentTeams);
+  console.log(games);
   useEffect(() => {
     (async () => {
-      await axios
-        .get(teamsURL)
-        .then((res) => res.data)
-        .then((result) => {
-          setTeams(result.data);
-          dispatchData({ type: "LOADING", payload: false });
-        });
+      const response = await getTeamsService();
+      setTeams(response.data);
+      if (response.data.length > 0) {
+        dispatchData({ type: "LOADING", payload: false });
+      }
     })();
   }, []);
 
   useEffect(() => {
     (async () => {
-      await axios
-        .get(gamesURL)
-        .then((res) => res.data)
-        .then((result) => {
-          setGames(result.data);
-        });
+      const response = await getGamesService();
+      setGames(response.data);
     })();
   }, []);
 
