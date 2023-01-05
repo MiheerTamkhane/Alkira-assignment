@@ -22,7 +22,7 @@ const TeamsProvider = ({ children }) => {
   const indexOfLastPost = data.currentPage * data.teamsPerPage;
   const indexOfFirstPost = indexOfLastPost - data.teamsPerPage;
   const currentTeams = searchedData?.slice(indexOfFirstPost, indexOfLastPost);
-  console.log(games);
+
   useEffect(() => {
     (async () => {
       const response = await getTeamsService();
@@ -44,10 +44,6 @@ const TeamsProvider = ({ children }) => {
     setTeamDetails(games.find((game) => game.home_team.id === selectedTeam));
   }, [selectedTeam, games]);
 
-  function changePageHandler(pageNum) {
-    dispatchData({ type: "CURR_PAGE", payload: pageNum });
-  }
-
   return (
     <TeamsContext.Provider
       value={{
@@ -55,7 +51,6 @@ const TeamsProvider = ({ children }) => {
         showCanvas,
         setShowCanvas,
         currentTeams,
-        changePageHandler,
         dispatchData,
         data,
         searchedData,

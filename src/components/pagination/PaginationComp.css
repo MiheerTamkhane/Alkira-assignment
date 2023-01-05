@@ -1,9 +1,41 @@
 .pagination-container {
   width: 100%;
   display: flex;
+  align-items: center;
+  justify-content: center;
   justify-content: flex-end;
-  padding-right: 3rem;
 }
+.pagination {
+  align-items: center !important;
+}
+
+.arrow {
+  font-size: 1.6rem;
+  padding: 0 0.5rem;
+  color: #074684;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.select-container > span {
+  padding: 0 0.3rem;
+}
+
+.fade {
+  /* opacity: 80%; */
+  font-size: 1.6rem;
+  padding: 0 0.5rem;
+  color: #074684;
+  cursor: pointer;
+  font-weight: bold;
+}
+
 .active > .page-link {
   background-color: #074684;
+}
+
+.select-page {
+  border: 1px solid #074684;
+  outline: none;
+  padding: 0.2rem;
 }

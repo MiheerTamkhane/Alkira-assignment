@@ -68,4 +68,21 @@ describe("Testing reducer function", () => {
       sort: { sortType: "city", bool: true },
     });
   });
+
+  test("should change the value of results showing per page", () => {
+    const action = {
+      type: "TEAMS_PER_PAGE",
+      payload: 20,
+    };
+
+    const state = reducer(initialState, action);
+
+    expect(state).toEqual({
+      isLoading: true,
+      currentPage: 1,
+      teamsPerPage: 20,
+      query: "",
+      sort: { sortType: "city", bool: true },
+    });
+  });
 });

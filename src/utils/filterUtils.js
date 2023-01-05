@@ -8,7 +8,6 @@ export function filterBySearch(data, query) {
 }
 
 export function sortingHandler(data, sortWith) {
-  console.log(sortWith);
   if (sortWith?.bool) {
     return data.sort((a, b) =>
       a[`${sortWith?.sortType}`].localeCompare(b[`${sortWith?.sortType}`])

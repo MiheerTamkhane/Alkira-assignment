@@ -8,6 +8,8 @@ export function reducer(state, action) {
       return { ...state, sort: action.payload };
     case "CURR_PAGE":
       return { ...state, currentPage: action.payload };
+    case "TEAMS_PER_PAGE":
+      return { ...state, teamsPerPage: action.payload };
     default:
       return state;
   }
