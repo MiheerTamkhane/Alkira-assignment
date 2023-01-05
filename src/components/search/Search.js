@@ -2,7 +2,7 @@ import { useTeams } from "../../context/TeamsContext";
 import "./Search.css";
 
 export const Search = () => {
-  const { dispatchData } = useTeams();
+  const teamsObj = useTeams();
   return (
     <div className="search-container">
       <svg
@@ -24,8 +24,12 @@ export const Search = () => {
         className="search"
         placeholder="Search..."
         type="search"
+        data-testid="search"
         onChange={(e) =>
-          dispatchData({ type: "SEARCH", payload: e.target.value.trim() })
+          teamsObj.dispatchData({
+            type: "SEARCH",
+            payload: e.target.value.trim(),
+          })
         }
       />
     </div>

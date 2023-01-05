@@ -2,13 +2,22 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { useTeams } from "../../context/TeamsContext";
 import "./OffCanvas.css";
 export const OffCanvas = () => {
-  const { showCanvas, setShowCanvas, teamDetails } = useTeams();
-  console.log(teamDetails);
+  // const { showCanvas, setShowCanvas, teamDetails } = useTeams();
+  const teamsObj = useTeams();
+
   return (
     <>
-      <Offcanvas show={showCanvas} onHide={setShowCanvas} placement={"end"}>
+      <Offcanvas
+        show={teamsObj?.showCanvas}
+        onHide={teamsObj?.setShowCanvas}
+        placement={"end"}
+      >
         <Offcanvas.Header closeButton className="offcanvas-header">
-          <Offcanvas.Title>{teamDetails?.home_team?.name}</Offcanvas.Title>
+          <Offcanvas.Title>
+            {teamsObj?.teamDetails
+              ? teamsObj?.teamDetails?.home_team?.name
+              : "Hawks"}
+          </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div className="details-container">
@@ -16,14 +25,18 @@ export const OffCanvas = () => {
               <div className="team-row">
                 <p>Team Full Name</p>
                 <p>
-                  {teamDetails
-                    ? teamDetails?.home_team?.full_name
+                  {teamsObj?.teamDetails
+                    ? teamsObj?.teamDetails?.home_team?.full_name
                     : "Atlanta Hawks"}
                 </p>
               </div>
               <div className="team-row">
-                <p>Total Games in {teamDetails?.season}</p>
-                <p>{teamDetails ? teamDetails?.home_team_score : "88"}</p>
+                <p>Total Games in {teamsObj?.teamDetails?.season}</p>
+                <p>
+                  {teamsObj?.teamDetails
+                    ? teamsObj?.teamDetails?.home_team_score
+                    : "88"}
+                </p>
               </div>
             </div>
             <div className="details-body">
@@ -32,28 +45,42 @@ export const OffCanvas = () => {
                 <div className="details-row">
                   <p>Date</p>
                   <p>
-                    {teamDetails
-                      ? teamDetails?.date?.split("T")[0]
+                    {teamsObj?.teamDetails
+                      ? teamsObj?.teamDetails?.date?.split("T")[0]
                       : "2019-02-08"}
                   </p>
                 </div>
                 <div className="details-row">
                   <p>Home Team</p>
-                  <p>{teamDetails ? teamDetails?.home_team?.name : "Hawks"}</p>
+                  <p>
+                    {teamsObj?.teamDetails
+                      ? teamsObj?.teamDetails?.home_team?.name
+                      : "Hawks"}
+                  </p>
                 </div>
                 <div className="details-row">
                   <p>Home Team Score</p>
-                  <p>{teamDetails ? teamDetails?.home_team_score : "120"}</p>
+                  <p>
+                    {teamsObj?.teamDetails
+                      ? teamsObj?.teamDetails?.home_team_score
+                      : "120"}
+                  </p>
                 </div>
                 <div className="details-row">
                   <p>Visitor Team</p>
                   <p>
-                    {teamDetails ? teamDetails?.visitor_team?.name : "Hornets"}
+                    {teamsObj?.teamDetails
+                      ? teamsObj?.teamDetails?.visitor_team?.name
+                      : "Hornets"}
                   </p>
                 </div>
                 <div className="details-row">
                   <p>Visitor Team Score</p>
-                  <p>{teamDetails ? teamDetails?.visitor_team_score : "129"}</p>
+                  <p>
+                    {teamsObj?.teamDetails
+                      ? teamsObj?.teamDetails?.visitor_team_score
+                      : "129"}
+                  </p>
                 </div>
               </div>
             </div>

@@ -3,7 +3,9 @@ import { TeamsTable, OffCanvas, Search } from "./components";
 function App() {
   return (
     <div className="App">
-      <h1 className="heading">NBA TEAMS</h1>
+      <h1 className="heading" data-testid="heading">
+        NBA TEAMS
+      </h1>
       <Search />
       <OffCanvas />
       <TeamsTable />
