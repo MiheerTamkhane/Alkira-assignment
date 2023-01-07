@@ -6,13 +6,12 @@ import {
   useReducer,
 } from "react";
 import { filterBySearch, sortingHandler } from "../utils/filterUtils";
-import { getGamesService, getTeamsService } from "../services";
+import { getTeamsService } from "../services";
 import { reducer, initialState } from "../reducer/reducer";
 const TeamsContext = createContext();
 
 const TeamsProvider = ({ children }) => {
   const [teams, setTeams] = useState([]);
-  const [games, setGames] = useState([]);
   const [data, dispatchData] = useReducer(reducer, initialState);
   const [showCanvas, setShowCanvas] = useState(false);
   const [teamDetails, setTeamDetails] = useState({});
@@ -34,16 +33,8 @@ const TeamsProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    (async () => {
-      const response = await getGamesService();
-      setGames(response.data);
-    })();
-  }, []);
-
-  useEffect(() => {
-    setTeamDetails(games.find((game) => game.home_team.id === selectedTeam));
-  }, [selectedTeam, games]);
-
+    setTeamDetails(teams?.find((team) => team.id === selectedTeam));
+  }, [selectedTeam, teams]);
   return (
     <TeamsContext.Provider
       value={{
