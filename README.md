@@ -1,10 +1,10 @@
 # DataTable In React
 
-Bult DataTable using ReactJs and React Bootstrap, which has features like sorting, searching, pagination and entries per page. This is an assignment given by Alkira Inc.
+Built DataTable using ReactJs and React Bootstrap, which has features like sorting, searching, pagination and entries per page. This is an assignment given by Alkira Inc.
 
 ## Live
 
-This project is hosted on netlify.app
+This project is hosted on netlify.
 
 https://nba-table.netlify.app/
 
